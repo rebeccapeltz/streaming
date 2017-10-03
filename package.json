@@ -2,7 +2,7 @@
   "name": "projects",
   "version": "1.0.0",
   "description": "Streaming server",
-  "repository":"git@github.com:rebeccapeltz/streaming.git",
+  "repository": "git@github.com:rebeccapeltz/streaming.git",
   "main": "server.js",
   "engines": {
     "node": "6.2.0"
@@ -15,7 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "bufferutil": "3.0.2",
+    "chart.js": "^2.7.0",
     "express": "4.16.1",
+    "twitter": "^1.7.1",
     "utf-8-validate": "3.0.3",
     "ws": "3.2.0"
   }

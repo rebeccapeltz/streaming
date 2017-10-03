@@ -7,20 +7,25 @@
 </head>
 
 <body>
-    Server time
-<div id="server-time"></div>
+    Twitter Feed
+    <canvas id="myChart" style="height:400px;width:960px;"></canvas>
+    <div id="twit-text" style="height:400px;width:960px;overflow-y:scroll;"></div>
+    <script src="/moment/moment.js"></script>
+    <script src="/chart/Chart.min.js"></script>
+    <script src="/chart-stream/chartjs-plugin-streaming.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+        //this code runs on the server
+        var HOST = location.origin.replace(/^http/, 'ws')
+        var ws = new WebSocket(HOST);
+        var el = document.getElementById('twit-text');
 
-<script src="node_modules/ws_lib/WebSocket.js"></script>
-<script>
+        ws.onmessage = function (event) {
+            //   el.innerHTML = el.innerHTML + '<br>' + decodeURIComponent(event.data);
+            el.innerHTML = el.innerHTML + '<br>' + event.data;
 
-var HOST = location.origin.replace(/^http/, 'ws')
-var ws = new WebSocket(HOST);
-var el = document.getElementById('server-time');
-
-ws.onmessage = function (event) {
-  el.innerHTML = 'Server time: ' + event.data;
-};
-</script>
+        };
+    </script>
 </body>
 
 </html>
