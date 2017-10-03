@@ -10,6 +10,7 @@ const PORT = 3000;
 const path = require('path');
 const express = require("express");
 const WebSocket = require('ws');
+const moment = require('moment');
 
 
 console.log(path.join(__dirname,'‌​node_modules'))
@@ -77,7 +78,7 @@ twitClient.stream('statuses/filter', {
         total++;
         avg = getAvg(avg, count, total);
         // client.send(`count:${count} avg:${avg} date:${Date(start).toString()} text:` + (event && encodeURIComponent(event.text)));
-        client.send(JSON.stringify({"count":count, "avg":avg, "date": Date(start).toString()}));
+        client.send(JSON.stringify({"count":count, "avg":avg, "date": moment(start).format()}));
         count = 0;
         
         console.log(event && event.text);

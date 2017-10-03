@@ -4,27 +4,47 @@
 <head>
     <title>Streaming Time</title>
     <meta charset="utf-8">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+	<script type="text/javascript" src="https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.2.0/chartjs-plugin-streaming.min.js"></script>
+     -->
+
+    <script src="/moment/moment.js"></script>
+    <script src="/chart/Chart.min.js"></script>
+    <!-- <script type="text/javascript" src="https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.2.0/chartjs-plugin-streaming.min.js"></script> -->
+
+    <script src="/chart-stream/chartjs-plugin-streaming.min.js"></script>
+
+
+
 </head>
 
 <body>
-    Twitter Feed
-    <canvas id="myChart" style="height:400px;width:960px;"></canvas>
+    <h1>Twitter Feed</h1>
+
+    <p>
+        <div style="width:580px; margin:auto;">
+            <canvas id="myChart"></canvas>
+        </div>
+    </p>
     <div id="twit-text" style="height:400px;width:960px;overflow-y:scroll;"></div>
-    <script src="/moment/moment.js"></script>
-    <script src="/chart/Chart.min.js"></script>
-    <script src="/chart-stream/chartjs-plugin-streaming.min.js"></script>
+
+
+
+
     <script src="main.js"></script>
     <script>
-        //this code runs on the server
-        var HOST = location.origin.replace(/^http/, 'ws')
-        var ws = new WebSocket(HOST);
-        var el = document.getElementById('twit-text');
+        // //this code runs on the server
+        // var HOST = location.origin.replace(/^http/, 'ws')
+        // var ws = new WebSocket(HOST);
+        // var el = document.getElementById('twit-text');
 
-        ws.onmessage = function (event) {
-            //   el.innerHTML = el.innerHTML + '<br>' + decodeURIComponent(event.data);
-            el.innerHTML = el.innerHTML + '<br>' + event.data;
 
-        };
+        // ws.onmessage = function (event) {
+        //     //   el.innerHTML = el.innerHTML + '<br>' + decodeURIComponent(event.data);
+        //     el.innerHTML = el.innerHTML + '<br>' + event.data;
+
+        // };
     </script>
 </body>
 
