@@ -3,16 +3,21 @@ var HOST = location.origin.replace(/^http/, 'ws')
 var ws = new WebSocket(HOST);
 var el = document.getElementById('twit-text');
 
-var twitData = [];
+var twitCount = [];
+var twitAvg = [];
 
 
 ws.onmessage = function (event) {
     //   el.innerHTML = el.innerHTML + '<br>' + decodeURIComponent(event.data);
     el.innerHTML = el.innerHTML + '<br>' + event.data;
     let obj = JSON.parse(event.data);
-    twitData.push({
+    twitCount.push({
       x: moment(obj.date),
       y: obj.count
+    });
+    twitAvg.push({
+      x: moment(obj.date),
+      y: obj.avg
     })
 
 };
@@ -31,11 +36,11 @@ var config = {
     type: 'line',
     data: {
       datasets: [{
-        data: twitData
+        data: twitCount
       }
-      // , {
-      //   data: []
-      // }
+      , {
+        data: twitAvg
+      }
     ]
     },
     options: {
