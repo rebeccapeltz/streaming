@@ -30,10 +30,6 @@ const server = express()
 })
 .listen(process.env.port || PORT , () => console.log(`Listening on ${ PORT }`));
 
-process.env.TWITTER_CONSUMER_KEY = "rWSg8E0Hqk8MzytaHJDgCNXRt";
-process.env.TWITTER_CONSUMER_SECRET = "BRpKYXu362FOOG6hCoHiQ1qNtiAnJqQTv1uGyNTCuOvUXNQ4xs";
-process.env.TWITTER_ACCESS_TOKEN_KEY = "34928160-YPb7tvcnWqz5TLGVN6SPKIbmpUZXOtkBvIyU7D3nU";
-process.env.TWITTER_ACCESS_TOKEN_SECRET = "mTTAWKGFNQiMibspDe5rVEWFXDhVHE3JVbpFH1JZ5xRMv";
 
 const Twitter = require('twitter');
 
