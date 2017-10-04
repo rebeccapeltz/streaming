@@ -36,10 +36,16 @@ var config = {
     type: 'line',
     data: {
       datasets: [{
-        data: twitCount
+        data: twitCount,
+        label: 'Count',
+        borderColor: 'rgb(54, 162, 235)',
+        backgroundColor: 'rgba(54, 162, 235, 0.5)'
       }
       , {
-        data: twitAvg
+        data: twitAvg,
+        label: 'Average',
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)'
       }
     ]
     },
