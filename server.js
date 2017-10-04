@@ -28,7 +28,7 @@ const server = express()
 .get('/main.js', function(req, res) {
   res.sendFile(MAIN);
 })
-.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+.listen(process.env.port || PORT , () => console.log(`Listening on ${ PORT }`));
 
 process.env.TWITTER_CONSUMER_KEY = "rWSg8E0Hqk8MzytaHJDgCNXRt";
 process.env.TWITTER_CONSUMER_SECRET = "BRpKYXu362FOOG6hCoHiQ1qNtiAnJqQTv1uGyNTCuOvUXNQ4xs";
