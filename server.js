@@ -10,8 +10,9 @@ const path = require('path');
 const express = require("express");
 const WebSocket = require('ws');
 const moment = require('moment');
+var config = {};
 try {
-  const config = require('./config');
+  config = require('./config');
 } catch (e) {
   console.log('PROD run: config not found')
   console.log(e)
