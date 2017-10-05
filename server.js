@@ -17,7 +17,7 @@ try {
   console.log('PROD run: config not found')
   console.log(e)
 }
-
+console.log("test",process.env.TWITTER_CONSUMER_KEY)
 
 console.log(path.join(__dirname, '‌​node_modules'))
 const server = express()
