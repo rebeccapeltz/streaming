@@ -1,37 +1,41 @@
-
 /*
 Server reads stream of filtered twitter data and relays a count, avg and time 
 every second to its clients.
 */
 'use strict';
-const INDEX ="/Users/peltzr/projects/streaming/index.html";
+const INDEX = "/Users/peltzr/projects/streaming/index.html";
 let MAIN = "/Users/peltzr/projects/streaming/main.js";
 const PORT = 3000;
 const path = require('path');
 const express = require("express");
 const WebSocket = require('ws');
 const moment = require('moment');
-const config = require('./config');
+try {
+  const config = require('./config');
+} catch (e) {
+  console.log('PROD run: config not found')
+  console.log(e)
+}
 
 
-console.log(path.join(__dirname,'‌​node_modules'))
+console.log(path.join(__dirname, '‌​node_modules'))
 const server = express()
-.use('/moment',express.static(__dirname + '/node_modules/moment'))
-.use('/chart',express.static(__dirname + '/node_modules/chart.js/dist'))
-.use('/chart-stream',express.static(__dirname + '/node_modules/chartjs-plugin-streaming/dist'))
-.use('/ws',express.static(__dirname + '/node_modules/ws/lib'))
-.get('/', function(req, res) {
-  res.sendFile(INDEX);
-})
-.get('/index.html', function(req, res) {
-  res.sendFile(INDEX);
-})
-.get('/main.js', function(req, res) {
-  res.sendFile(MAIN);
-})
-.listen(process.env.port || PORT , () => console.log(`Listening on ${ PORT }`));
+  .use('/moment', express.static(__dirname + '/node_modules/moment'))
+  .use('/chart', express.static(__dirname + '/node_modules/chart.js/dist'))
+  .use('/chart-stream', express.static(__dirname + '/node_modules/chartjs-plugin-streaming/dist'))
+  .use('/ws', express.static(__dirname + '/node_modules/ws/lib'))
+  .get('/', function (req, res) {
+    res.sendFile(INDEX);
+  })
+  .get('/index.html', function (req, res) {
+    res.sendFile(INDEX);
+  })
+  .get('/main.js', function (req, res) {
+    res.sendFile(MAIN);
+  })
+  .listen(process.env.port || PORT, () => console.log(`Listening on ${ PORT }`));
 
-var consumerKey = process.env.TWITTER_CONSUMER_KEY  || config.TWITTER_CONSUMER_KEY;
+var consumerKey = process.env.TWITTER_CONSUMER_KEY || config.TWITTER_CONSUMER_KEY;
 var consumerSecret = process.env.TWITTER_CONSUMER_SECRET || config.TWITTER_CONSUMER_SECRET;
 var accessTokenKey = process.env.TWITTER_ACCESS_TOKEN_KEY || config.TWITTER_ACCESS_TOKEN_KEY;
 var accessTokenSecret = process.env.TWITTER_ACCESS_TOKEN_SECRET || config.TWITTER_ACCESS_TOKEN_SECRET;
@@ -56,10 +60,9 @@ wss.on('connection', (ws) => {
   ws.on('close', () => console.log('Client disconnected'));
 });
 
-function getAvg(prevAvg, x, n)
-{
+function getAvg(prevAvg, x, n) {
   if (prevAvg === 0) return x;
-  return (prevAvg*n + x)/(n+1);
+  return (prevAvg * n + x) / (n + 1);
 }
 
 let start = Date.now();
@@ -79,9 +82,13 @@ twitClient.stream('statuses/filter', {
         total++;
         avg = getAvg(avg, count, total);
         // client.send(`count:${count} avg:${avg} date:${Date(start).toString()} text:` + (event && encodeURIComponent(event.text)));
-        client.send(JSON.stringify({"count":count, "avg":avg, "date": moment(start).format()}));
+        client.send(JSON.stringify({
+          "count": count,
+          "avg": avg,
+          "date": moment(start).format()
+        }));
         count = 0;
-        
+
         console.log(event && event.text);
       });
       next = start + 1000;
