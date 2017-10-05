@@ -5,7 +5,7 @@ every second to its clients.
 'use strict';
 const INDEX = "/Users/peltzr/projects/streaming/index.html";
 let MAIN = "/Users/peltzr/projects/streaming/main.js";
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const path = require('path');
 const express = require("express");
 const WebSocket = require('ws');
@@ -34,7 +34,7 @@ const server = express()
   .get('/main.js', function (req, res) {
     res.sendFile(MAIN);
   })
-  .listen(process.env.port || PORT, () => console.log(`Listening on ${ PORT }`));
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 var consumerKey = process.env.TWITTER_CONSUMER_KEY || config.TWITTER_CONSUMER_KEY;
 var consumerSecret = process.env.TWITTER_CONSUMER_SECRET || config.TWITTER_CONSUMER_SECRET;
