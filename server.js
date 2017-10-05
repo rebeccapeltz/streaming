@@ -11,13 +11,13 @@ const express = require("express");
 const WebSocket = require('ws');
 const moment = require('moment');
 var config = {};
-try {
-  config = require('./config');
-} catch (e) {
-  console.log('PROD run: config not found')
-  console.log(e)
-}
-console.log("test",process.env.TWITTER_CONSUMER_KEY)
+// try {
+//   config = require('./config');
+// } catch (e) {
+//   console.log('PROD run: config not found')
+//   console.log(e)
+// }
+
 
 console.log(path.join(__dirname, '‌​node_modules'))
 const server = express()
