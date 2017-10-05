@@ -11,12 +11,12 @@ const express = require("express");
 const WebSocket = require('ws');
 const moment = require('moment');
 var config;
-try {
-  config = require('./config.js');
-} catch (e) {
-  console.log('PROD run: config not found')
-  console.log(e)
-}
+// try {
+//   config = require('./config.js');
+// } catch (e) {
+//   console.log('PROD run: config not found')
+//   console.log(e)
+// }
 
 
 console.log(path.join(__dirname, '‌​node_modules'))
