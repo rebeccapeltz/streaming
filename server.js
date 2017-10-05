@@ -3,20 +3,18 @@ Server reads stream of filtered twitter data and relays a count, avg and time
 every second to its clients.
 */
 'use strict';
-const INDEX = "/Users/peltzr/projects/streaming/index.html";
-let MAIN = "/Users/peltzr/projects/streaming/main.js";
+const INDEX = "index.html";
+let MAIN = "main.js";
 const PORT = process.env.PORT || 3000;
 const path = require('path');
 const express = require("express");
 const WebSocket = require('ws');
 const moment = require('moment');
 var config;
-// try {
-//   config = require('./config.js');
-// } catch (e) {
-//   console.log('PROD run: config not found')
-//   console.log(e)
-// }
+if (!process.env){
+  config = require('./config.js');
+}
+
 
 
 console.log(path.join(__dirname, '‌​node_modules'))
@@ -26,13 +24,13 @@ const server = express()
   .use('/chart-stream', express.static(__dirname + '/node_modules/chartjs-plugin-streaming/dist'))
   .use('/ws', express.static(__dirname + '/node_modules/ws/lib'))
   .get('/', function (req, res) {
-    res.sendFile(INDEX);
+    res.sendFile(path.join(__dirname,  INDEX));
   })
   .get('/index.html', function (req, res) {
-    res.sendFile(INDEX);
+    res.sendFile(path.join(__dirname,  INDEX));
   })
   .get('/main.js', function (req, res) {
-    res.sendFile(MAIN);
+    res.sendFile(path.join(__dirname,  MAIN));
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
