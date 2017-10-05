@@ -11,6 +11,7 @@ const path = require('path');
 const express = require("express");
 const WebSocket = require('ws');
 const moment = require('moment');
+const config = require('./config');
 
 
 console.log(path.join(__dirname,'‌​node_modules'))
@@ -30,14 +31,18 @@ const server = express()
 })
 .listen(process.env.port || PORT , () => console.log(`Listening on ${ PORT }`));
 
+var consumerKey = process.env.TWITTER_CONSUMER_KEY  || config.TWITTER_CONSUMER_KEY;
+var consumerSecret = process.env.TWITTER_CONSUMER_SECRET || config.TWITTER_CONSUMER_SECRET;
+var accessTokenKey = process.env.TWITTER_ACCESS_TOKEN_KEY || config.TWITTER_ACCESS_TOKEN_KEY;
+var accessTokenSecret = process.env.TWITTER_ACCESS_TOKEN_SECRET || config.TWITTER_ACCESS_TOKEN_SECRET;
 
 const Twitter = require('twitter');
 
 let twitClient = new Twitter({
-  consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+  consumer_key: consumerKey,
+  consumer_secret: consumerSecret,
+  access_token_key: accessTokenKey,
+  access_token_secret: accessTokenSecret
 });
 let trackOption = 'Trump';
 
