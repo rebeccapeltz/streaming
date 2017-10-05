@@ -11,7 +11,7 @@ const express = require("express");
 const WebSocket = require('ws');
 const moment = require('moment');
 var config;
-if (!process.env){
+if (!process.env.TWITTER_CONSUMER_KEY){
   config = require('./config.js');
 }
 
