@@ -8,7 +8,6 @@ var twitAvg = [];
 
 
 ws.onmessage = function (event) {
-    //   el.innerHTML = el.innerHTML + '<br>' + decodeURIComponent(event.data);
     el.innerHTML = el.innerHTML + '<br>' + event.data;
     let obj = JSON.parse(event.data);
     twitCount.push({
@@ -22,16 +21,7 @@ ws.onmessage = function (event) {
 
 };
 
-function onRefresh(chart) {
-  // var newData =  {
-  //   x: Date.now(),
-  //   y: Math.random()
-  // };
-  // config.data.datasets.forEach(function (dataset) {
-  //   dataset.data.push(newData);
-  // });
-  // config.data.datasets = twitData;
-}
+  
 var config = {
     type: 'line',
     data: {
@@ -57,8 +47,7 @@ var config = {
       },
       plugins: {
         streaming: {
-          delay: 2000,
-          onRefresh: onRefresh
+          delay: 2000
         }
       }
     }
