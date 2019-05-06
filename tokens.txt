@@ -1,0 +1,7 @@
+
+
+const config = {
+  key:value
+}
+module.exports = config;
+
