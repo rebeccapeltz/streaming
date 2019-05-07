@@ -8,20 +8,19 @@ var twitAvg = [];
 
 
 ws.onmessage = function (event) {
-    el.innerHTML = el.innerHTML + '<br>' + event.data;
+    el.innerHTML = decodeURIComponent(event.data) + '<br>'  +el.innerHTML;
     let obj = JSON.parse(event.data);
     twitCount.push({
-      x: moment(obj.date),
+      x: moment(obj.date).format(),
       y: obj.count
     });
     twitAvg.push({
-      x: moment(obj.date),
+      x: moment(obj.date).format(),
       y: obj.avg
     })
-
 };
 
-  
+
 var config = {
     type: 'line',
     data: {

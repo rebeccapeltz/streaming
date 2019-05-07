@@ -61,7 +61,10 @@ wss.on('connection', (ws) => {
 
 function getAvg(prevAvg, x, n) {
   if (prevAvg === 0) return x;
-  return (prevAvg * n + x) / (n + 1);
+  let differential = (x - prevAvg) / n
+  let newAvg = prevAvg + differential
+  return newAvg
+  // return (prevAvg * n + x) / (n + 1);
 }
 
 let start = Date.now();
@@ -82,8 +85,9 @@ twitClient.stream('statuses/filter', {
         avg = getAvg(avg, count, total);
         // client.send(`count:${count} avg:${avg} date:${Date(start).toString()} text:` + (event && encodeURIComponent(event.text)));
         client.send(JSON.stringify({
+          "text": (event && encodeURIComponent(event.text)),
           "count": count,
-          "avg": avg,
+          "avg": avg.toFixed(2),
           "date": moment(start).format()
         }));
         count = 0;
