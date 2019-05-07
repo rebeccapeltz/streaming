@@ -64,7 +64,6 @@ function getAvg(prevAvg, x, n) {
   let differential = (x - prevAvg) / n
   let newAvg = prevAvg + differential
   return newAvg
-  // return (prevAvg * n + x) / (n + 1);
 }
 
 let start = Date.now();
